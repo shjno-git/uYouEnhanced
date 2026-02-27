@@ -3,13 +3,12 @@ name: Sync tags from upstream
 on:
   workflow_dispatch:
 
-permissions:
-  contents: write 
-  workflows: write 
-
 jobs:
   sync:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      workflows: write   # ← job レベルならOK
     steps:
       - name: Checkout fork
         uses: actions/checkout@v4
