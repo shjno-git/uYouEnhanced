@@ -1,0 +1,22 @@
+name: Sync tags from upstream
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout fork
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # 全履歴・全タグ取得
+
+      - name: Add upstream and fetch tags
+        run: |
+          git remote add upstream https://github.com/arichornlover/uYouEnhanced.git
+          git fetch upstream --tags
+
+      - name: Push tags to fork
+        run: |
+          git push origin --tags
